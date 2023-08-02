@@ -7,11 +7,11 @@ exports.register = async (req,res) =>{
         const findEmail = await userModel.findOne({email})
         if(findEmail)
         {
-           res.message = "Email already registered"
-           return message.badRequest(res)
+            res.message = req.t('failRegister');
+            return message.badRequest(res);
         }
         const result = await new userModel(req.body).save();
-        res.message = "Successfully registered"
+        res.message = req.t('successRegister');
         message.success(result,res)
     } catch (error) {
         console.log(error.message)
@@ -22,7 +22,7 @@ exports.register = async (req,res) =>{
 exports.login = async (req, res) => {
     try {
         const result = req.user
-        res.message = "Login Successful"
+        res.message = req.t('loginSuccess');
         message.success(result,res)
     } catch (error) {
         console.log(error.message)

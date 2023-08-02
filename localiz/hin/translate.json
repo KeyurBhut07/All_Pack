@@ -1,0 +1,8 @@
+{
+    "failRegister" : "ईमेल पहले से ही पंजीकृत है",
+    "successRegister" : "ईमेल सफलतापूर्वक पंजीकृत",
+    "loginSuccess" : "सफलतापूर्वक लॉगिन करें",
+    "userNotFound" : "उपयोगकर्ता नहीं मिला",
+    "nvalidPassword" : "अवैध पासवर्ड",
+    "invalidCredentials" : "अवैध प्रत्यय पत्"
+}

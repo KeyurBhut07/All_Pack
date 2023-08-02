@@ -21,7 +21,7 @@ exports.unAuthorized = (res) =>{
     return res.status(statusCode.unAuthorized).json({
         status : statusCode.unAuthorized,
         success : false,
-        message : "Unauthorized User",
+        message : res.message,
     })
 } 
 

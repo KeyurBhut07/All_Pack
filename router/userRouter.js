@@ -14,4 +14,5 @@ router.post("/register", validation(user) , userController.register)
 router.post("/login" ,passport.authenticate('local'),(err, req, res, next) =>{
     return message.loginMessageError(err,res)}, userController.login)
 
+
 module.exports = router

@@ -1,0 +1,8 @@
+{
+    "failRegister" : "Email already registered",
+    "successRegister" : "Email Successfully Registered",
+    "loginSuccess" : "Login Successfully",
+    "userNotFound" : "User Not Found",
+    "nvalidPassword" : "Invalid Password",
+    "invalidCredentials" : "Invalid Credentials"
+}

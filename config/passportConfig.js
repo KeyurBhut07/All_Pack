@@ -9,7 +9,7 @@ exports.initializingPassport = () => {
         const user =  await userModel.findOne({ email:username });
         if (!user)
         { 
-          return cb({err : "User not found"}); 
+            return cb({err : "User not found"}); 
         }
         if (user.password !== password) 
         {
