@@ -4,7 +4,8 @@ const express = require("express")
 const app = express()
 const passport = require("passport")
 const expressSession = require("express-session")
-
+require("./mail/transport")
+require("./processors/consumer")
 
 app.use(express.json())
 app.use(expressSession({

@@ -1,23 +1,26 @@
 const userModel = require("../model/userModel");
 const LocalStrategy = require("passport-local");
 const passport = require("passport");
+const i18next = require("i18next");
 
 exports.initializingPassport = () => {
   passport.use(
-    new LocalStrategy(async(username, password, cb) => {
+    new LocalStrategy(async(username, password, done) => {
       try {
         const user =  await userModel.findOne({ email:username });
         if (!user)
         { 
-            return cb({err : "User not found"}); 
+          return done({
+            err: i18next.t("userNotFound"),
+          });
         }
         if (user.password !== password) 
         {
-           return cb({err : "Invalid Password"});
+           return done({err : i18next.t('nvalidPassword')});
         }
-        return cb(null, user)
+        return done(null, user)
       } catch (err) {
-        return cb({err : "Invalid Credentials"});
+        return done({err : i18next.t('invalidCredentials')});
       }
     })
   );
@@ -31,7 +34,7 @@ exports.initializingPassport = () => {
         const user = await userModel.findById(id)
         done(null, user)
     } catch (error) {
-         done(null, false , { message : "User not found"});
+         done(null, false , { message : i18next.t("userNotFound")});
     }
   });
 };
