@@ -7,6 +7,7 @@ const expressSession = require("express-session")
 require("./mail/transport")
 require("./processors/consumer")
 
+
 app.use(express.json())
 app.use(expressSession({
     secret: 'secret',

@@ -10,9 +10,9 @@ const emailQueue = new Queue('emailQueue',{
 
 emailQueue.on('completed',(job)=>{
     console.log(`Completed ${job.id}`)
+    job.remove()
 })
 emailQueue.on("failed", (job)=>{
-    console.log(job)
     console.log(`failed ${job.id} ${job.data}`)
 });
 emailQueue.on("stalled", (job)=>{

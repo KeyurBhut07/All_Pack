@@ -1,12 +1,12 @@
 const userModel = require("../model/userModel")
+const movieModel = require("../model/movieModel")
 const message = require('../helper/message');
 const sendUserEmail = require("../mail/sendAccountCreateMail");
-const {REDIS_PORT,REDIS_URI} = require("../config/redisCredentials")
 const {emailQueue} = require("../processors/configration");
 const createJobs = (jobName, objToProcess, options) => {
     const defaultQueueOpts = { 
         priority: 0, 
-        attempts: 3, 
+        delay : 5000,
         removeOnComplete: true,
         removeOnFail: true
     };
@@ -48,8 +48,51 @@ exports.sendemailtouser = async (req,res) => {
         data.forEach((user, index) => {
             createJobs("emailQueue",user)
         })
+        // createJobs("emailQueue",{data})
         res.send({message:"all email are added in queue"})
     } catch (error) {
         console.log(error.message)
     }
 }
+
+// Agrigations
+exports.movies = async (req, res) => { 
+    try {
+        // const movie = await movieModel.aggregate([
+        //     {$match: { ratings : { $gte : 4.5}}},
+        //     { $group: {
+        //         _id : '$releaseYear',
+        //         avgPrice : {$avg : '$price'},
+        //         avgRating : {$avg : '$ratings' },
+        //         minPrice : {$min : '$price'},
+        //         maxPrice : {$max : '$price'},
+        //     }},
+        //     {$sort : {minPrice : 1}},
+        //     {$match : {maxPrice : {$gt : 60}}}
+        // ])
+
+        // const genres = "Action"
+        // const movie = await movieModel.aggregate([
+        //     {$unwind : '$genres'},
+        //     {$group : {
+        //         _id : '$genres',
+        //         movieCount : {$sum : 1},
+        //         movie : {$push : '$name'}
+        //     }},
+        //     {$addFields : {genres : '$_id'}},
+        //     {$project : {_id : 0}},
+        //     {$sort : {movieCount : -1}},
+        //     {$match : {genres : genres}}
+        // ])
+
+        const movie = await movieModel.find({})
+        res.status(200).send({
+            success:true,
+            count : movie.length,
+            data : {movie}
+        }) 
+    } catch (error) {
+        console.log(error)
+    }
+}
+

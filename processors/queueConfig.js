@@ -2,7 +2,12 @@ const sendUserEmail = require("../mail/sendAccountCreateMail")
 
 const emailQueueProcessers = async (name,email) => {
     try {
-        // sendUserEmail({name,email})
+        // const chunk = 5;
+        // for(let i = 0; i < chunk; i++){
+        //     console.log(">>>>>", name)
+        // }
+        // console.log(name)
+        await sendUserEmail({name,email})
     } catch (error) {
         console.log(error)
     }

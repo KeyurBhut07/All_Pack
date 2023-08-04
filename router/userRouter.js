@@ -16,5 +16,8 @@ router.post("/login" ,passport.authenticate('local'),(err, req, res, next) =>{
 
 router.post("/sendemailtouser" , userController.sendemailtouser)
 
+// Agrigations
+router.get("/movies" , userController.movies)
+
 
 module.exports = router
