@@ -6,6 +6,17 @@ const passport = require("passport")
 const expressSession = require("express-session")
 require("./mail/transport")
 require("./processors/consumer")
+const { bullRoute } = require("./processors/bullRoute")
+
+// Rate limit configuration and code 
+// const rateLimit = require("express-rate-limit")
+
+// const limiter = rateLimit({
+//   windowMS : 10 * 60 *1000, // 10 minutes
+//   max : 5,
+//   message : "Too Many Requests, Please Wait For 10 Minutes . Aftter You Are Enabled To Continue"
+// })
+// app.use(limiter)
 
 
 app.use(express.json())
@@ -16,6 +27,7 @@ app.use(expressSession({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+app.use("/queue", bullRoute)
 
 const i18n = require("i18next");
 const backend = require("i18next-fs-backend");

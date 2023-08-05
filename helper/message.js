@@ -5,7 +5,7 @@ exports.success = (result,res) =>{
         status : statusCode.success,
         success : true,
         message : res.message,
-        data : result
+        data : result ,
     })
 }
 

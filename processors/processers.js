@@ -2,8 +2,10 @@ const emailQueueProcessers = require("./queueConfig")
 module.exports = {
     _processors : {
         emailQueue: async ({data}) => {
-            const {name,email} = data
-            console.log(name)
+            setTimeout(() => {
+                const {name,email} = data
+                console.log(name)
+            }, 5000);
             // await emailQueueProcessers({name,email})
         }
     }

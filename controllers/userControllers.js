@@ -3,10 +3,11 @@ const movieModel = require("../model/movieModel")
 const message = require('../helper/message');
 const sendUserEmail = require("../mail/sendAccountCreateMail");
 const {emailQueue} = require("../processors/configration");
+const jwt = require("jsonwebtoken")
 const createJobs = (jobName, objToProcess, options) => {
     const defaultQueueOpts = { 
         priority: 0, 
-        delay : 5000,
+        dealy : 5000,
         removeOnComplete: true,
         removeOnFail: true
     };
@@ -23,6 +24,7 @@ exports.register = async (req,res) =>{
             return message.badRequest(res);
         }
         const result = await new userModel(req.body).save();
+        // const token = await jwt.sign({id:result._id},process.env.SECRATE_KEY,{expiresIn : process.env.LOGIN_EXPIRE})
         res.message = req.t('successRegister');
         message.success(result,res)
         // sendUserEmail({name,email})
@@ -49,6 +51,7 @@ exports.sendemailtouser = async (req,res) => {
             createJobs("emailQueue",user)
         })
         // createJobs("emailQueue",{data})
+        console.log('data: ', data);
         res.send({message:"all email are added in queue"})
     } catch (error) {
         console.log(error.message)
