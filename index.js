@@ -7,6 +7,10 @@ const expressSession = require("express-session")
 require("./mail/transport")
 require("./processors/consumer")
 const { bullRoute } = require("./processors/bullRoute")
+const cron = require("./config/cron")
+const moment = require("moment")
+const morgan = require("morgan")
+const logger = require("./config/logger")
 
 // Rate limit configuration and code 
 // const rateLimit = require("express-rate-limit")
@@ -45,9 +49,19 @@ i18n
 
 app.use(middleware.handle(i18n));
 
+// cron schedule package
+// cron
+
+// // Moment JS package 
+// console.log(moment().format("dddd Do MMM YYYY , hh:mm:ss a"))
+// console.log(moment().format('LTS'))
+
+// // morgan package
+// app.use(morgan('dev'))
+
 app.use("", require("./router/userRouter"))
 
 
 app.listen(process.env.PORT , ()=>{
-    console.log("server listening on http://localhost:5000")
+    logger.info("server listening on http://localhost:5000")
 })

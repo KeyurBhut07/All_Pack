@@ -8,7 +8,7 @@ const emailQueue = new Queue('emailQueue',{
     },
 })
 
-console.log("Queue Loading...")
+// console.log("Queue Loading...")
 
 emailQueue.on('completed',(job)=>{
     console.log(`Completed ${job.id}`)
